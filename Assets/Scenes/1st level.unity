@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000008b1e54f473e778eea7102c4ef35220619b071b45
+  m_ApplyToSortingLayers: 000000008b1e54f473e778eea7102c4ef35220619b071b45f944efe3
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -535,6 +535,17 @@ MonoBehaviour:
   obsticleLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &763370612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6172848091876433197, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+  m_PrefabInstance: {fileID: 6336346920759843301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763370601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384add6b6cba6734cac58e359e9a6d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796280985
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +834,7 @@ MonoBehaviour:
   objectToSpawnPrefab:
   - {fileID: 3418317185396118350, guid: df0395edb8c550349a9a6c6b070fbb1d, type: 3}
   - {fileID: 8768794461250637643, guid: 08ba5fb64502a7f4cbe5d2d348dfd6df, type: 3}
+  spawnedObjects: []
   currentGravity: {x: 0, y: 0}
   minTimeDelay: 1
   maxTimeDelay: 1.5
@@ -1248,7 +1260,7 @@ Transform:
   m_GameObject: {fileID: 1778230379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.29, y: 3.549056, z: -0.05454285}
+  m_LocalPosition: {x: 11.1, y: 3.549056, z: -0.05454285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1326,7 +1338,7 @@ Transform:
   m_GameObject: {fileID: 1907099710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.25, y: 3.549056, z: -0.05454285}
+  m_LocalPosition: {x: -19, y: 3.549056, z: -0.05454285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1420,6 +1432,10 @@ PrefabInstance:
       propertyPath: movingObjects
       value: 
       objectReference: {fileID: 1301479576}
+    - target: {fileID: 5979591070910152569, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: collisionWithObjects
+      value: 
+      objectReference: {fileID: 763370612}
     - target: {fileID: 6172848091876433197, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
       propertyPath: boulder
       value: 

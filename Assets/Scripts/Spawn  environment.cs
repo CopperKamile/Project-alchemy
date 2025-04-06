@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpawningEnvironment : MonoBehaviour
 {
     public List<GameObject> objectToSpawnPrefab;
+    public List<GameObject> spawnedObjects = new List<GameObject>();
 
     [HideInInspector] public Vector2 currentGravity;
     public float minTimeDelay;
@@ -45,7 +46,8 @@ public class SpawningEnvironment : MonoBehaviour
             int randomPrefabIndex = Random.Range(0, objectToSpawnPrefab.Count);
             GameObject prefabToSpawn = objectToSpawnPrefab[randomPrefabIndex];
 
-            Instantiate(prefabToSpawn, spawnPoints[randomSpawnSpot].transform.position, Quaternion.identity);
+            GameObject spawned = Instantiate(prefabToSpawn, spawnPoints[randomSpawnSpot].transform.position, Quaternion.identity);
+            spawnedObjects.Add(spawned);
             TotalCountOfSpawnedObjects++;
         }
     }

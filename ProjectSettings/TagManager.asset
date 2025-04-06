@@ -55,6 +55,9 @@ TagManager:
   - name: Dragon
     uniqueID: 1311510695
     locked: 0
+  - name: Obstacle
+    uniqueID: 3824108793
+    locked: 0
   - name: UI
     uniqueID: 1159399323
     locked: 0

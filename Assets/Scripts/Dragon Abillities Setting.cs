@@ -1,11 +1,15 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DragonAbillitiesSetting : MonoBehaviour
 {
     public GameObject dragonFire;
+    public GameObject trollyShadow;
     private InputAction dragonBreathInput;
+    private InputAction JumpInput;
     public TrollyController trolly;
+    public PlayerCollisiosn collisionWithObjects;
 
     [SerializeField] private float currentSpeed;
     public float speedBoost;
@@ -15,23 +19,37 @@ public class DragonAbillitiesSetting : MonoBehaviour
     private void Start()
     {
         dragonFire.SetActive(false);
+        trollyShadow.SetActive(false);
         currentSpeed = trolly.trollySpeed;
         dragonBreathInput = InputSystem.actions.FindAction("DragonBreath"); //press E
+        JumpInput = InputSystem.actions.FindAction("Jump");
     }
 
     private void Update()
-    {
-        if(dragonBreathInput.WasPressedThisFrame())
+    { 
+
+        //Later use states (enums or switch)
+        if (dragonBreathInput.WasPressedThisFrame())
         {
             dragonFire.SetActive(true);
             MovementSpeedIncreased();
             ApplySpeedToObstacles();
         }
-        else if(dragonBreathInput.WasReleasedThisFrame())
+        else if (dragonBreathInput.WasReleasedThisFrame())
         {
             dragonFire.SetActive(false);
             MovementSpeedDecreased();
             DeapplySpeedToObstacles();
+        }
+        else if (JumpInput.WasPressedThisFrame())
+        {
+            trollyShadow.SetActive(true);
+            JumpOver();
+        }
+        else if (JumpInput.WasReleasedThisFrame())
+        {
+            trollyShadow.SetActive(false);
+            LandOnGround();
         }
     }
 
@@ -71,5 +89,27 @@ public class DragonAbillitiesSetting : MonoBehaviour
         movingObjects.maxTimeDelay *= speedBoost;
     }
 
+
+    private void JumpOver() //jump over boulders and potions
+    {
+        collisionWithObjects.enabled = false;
+        foreach (GameObject obj in movingObjects.spawnedObjects)
+        {
+            Collider2D col = obj.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = false;
+        }
+    }
+
+    private void LandOnGround()
+    {
+        collisionWithObjects.enabled = true;
+        foreach (GameObject obj in movingObjects.spawnedObjects)
+        {
+            Collider2D col = obj.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
+        }
+    }
 
 }
