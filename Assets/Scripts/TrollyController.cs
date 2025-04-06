@@ -1,9 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 public class TrollyController : MonoBehaviour
 {
     //Human controlls the trolly: left and right and collect the potions
+
+    public float health;
+    public float currentHealth;
 
     public bool isTrollyMoving;
     private InputAction moveAction;
@@ -26,6 +30,7 @@ public class TrollyController : MonoBehaviour
 
     void Start()
     {
+        currentHealth = health;
         isTrollyMoving = false;
         trollyRigidBody = GetComponent<Rigidbody2D>();
     }

@@ -820,7 +820,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332e1e3c1cb4e874eb1b587a18162319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawnPrefab: {fileID: 3418317185396118350, guid: df0395edb8c550349a9a6c6b070fbb1d, type: 3}
+  objectToSpawnPrefab:
+  - {fileID: 3418317185396118350, guid: df0395edb8c550349a9a6c6b070fbb1d, type: 3}
+  - {fileID: 8768794461250637643, guid: 08ba5fb64502a7f4cbe5d2d348dfd6df, type: 3}
   currentGravity: {x: 0, y: 0}
   minTimeDelay: 1
   maxTimeDelay: 1.5
@@ -1343,6 +1345,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 781504077299803315, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 781504077299803315, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
       propertyPath: trollySpeed
       value: 0.5
       objectReference: {fileID: 0}
@@ -1414,6 +1420,10 @@ PrefabInstance:
       propertyPath: movingObjects
       value: 
       objectReference: {fileID: 1301479576}
+    - target: {fileID: 6172848091876433197, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: boulder
+      value: 
+      objectReference: {fileID: 419906802756981498, guid: 08ba5fb64502a7f4cbe5d2d348dfd6df, type: 3}
     - target: {fileID: 6172848091876433197, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
       propertyPath: countText
       value: 
