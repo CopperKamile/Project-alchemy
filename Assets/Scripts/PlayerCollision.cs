@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CollisionWithPotions : MonoBehaviour
+public class PlayerCollisiosn : MonoBehaviour
 {
     [SerializeField] private int potionsCount = 0;
     public TextMeshProUGUI countText;

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class TrollyConttroller : MonoBehaviour
+public class TrollyController : MonoBehaviour
 {
     //Human controlls the trolly: left and right and collect the potions
 
