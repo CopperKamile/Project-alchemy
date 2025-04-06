@@ -2,8 +2,9 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Potion
   layers:
   - Default
   - TransparentFX
@@ -11,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Obstacle
   - 
   - 
   - 
@@ -41,3 +42,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4099153547
+    locked: 0
+  - name: Midground
+    uniqueID: 1629508339
+    locked: 0
+  - name: Human
+    uniqueID: 4000900979
+    locked: 0
+  - name: Dragon
+    uniqueID: 1311510695
+    locked: 0
+  - name: UI
+    uniqueID: 1159399323
+    locked: 0
+  m_RenderingLayers:
+  - Default
