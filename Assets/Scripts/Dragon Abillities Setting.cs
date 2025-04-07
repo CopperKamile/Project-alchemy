@@ -6,6 +6,8 @@ public class DragonAbillitiesSetting : MonoBehaviour
 {
     public GameObject dragonFire;
     public GameObject trollyShadow;
+    public GameObject dragonWings;
+
     private InputAction dragonBreathInput;
     private InputAction JumpInput;
     public TrollyController trolly;
@@ -18,6 +20,7 @@ public class DragonAbillitiesSetting : MonoBehaviour
 
     private void Start()
     {
+        dragonWings.SetActive(false);
         dragonFire.SetActive(false);
         trollyShadow.SetActive(false);
         currentSpeed = trolly.trollySpeed;
@@ -43,11 +46,13 @@ public class DragonAbillitiesSetting : MonoBehaviour
         }
         else if (JumpInput.WasPressedThisFrame())
         {
+            dragonWings.SetActive(true);
             trollyShadow.SetActive(true);
             JumpOver();
         }
         else if (JumpInput.WasReleasedThisFrame())
         {
+            dragonWings.SetActive(false);
             trollyShadow.SetActive(false);
             LandOnGround();
         }
@@ -57,18 +62,18 @@ public class DragonAbillitiesSetting : MonoBehaviour
 
     private void MovementSpeedIncreased()
     {
-        Debug.Log("Speed without boost: " + currentSpeed);
+       // Debug.Log("Speed without boost: " + currentSpeed);
         currentSpeed *= speedBoost;
       
-        Debug.Log("Speed with boost: " + currentSpeed);
+        //Debug.Log("Speed with boost: " + currentSpeed);
     }
 
     private void MovementSpeedDecreased()
     {
-        Debug.Log("Speed without boost: " + currentSpeed);
+       // Debug.Log("Speed without boost: " + currentSpeed);
         currentSpeed = trolly.trollySpeed;
        
-        Debug.Log("Speed with boost: " + currentSpeed);
+        //Debug.Log("Speed with boost: " + currentSpeed);
     }
 
     private void ApplySpeedToObstacles()
@@ -93,23 +98,27 @@ public class DragonAbillitiesSetting : MonoBehaviour
     private void JumpOver() //jump over boulders and potions
     {
         collisionWithObjects.enabled = false;
-        foreach (GameObject obj in movingObjects.spawnedObjects)
-        {
-            Collider2D col = obj.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = false;
-        }
+        SetLayerMask(trolly.gameObject, LayerMask.NameToLayer("JumpingTrolly"));
     }
 
     private void LandOnGround()
     {
         collisionWithObjects.enabled = true;
-        foreach (GameObject obj in movingObjects.spawnedObjects)
-        {
-            Collider2D col = obj.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = true;
-        }
+        SetLayerMask(trolly.gameObject, LayerMask.NameToLayer("Player"));
     }
 
+    private void SetLayerMask(GameObject gameObjectParent, int newLayer)
+    {
+        if(gameObjectParent == null) { return; }
+
+        gameObjectParent.layer = newLayer;
+
+        foreach(Transform child in gameObjectParent.transform)
+        {
+            if(child != null)
+            {
+                child.gameObject.layer = newLayer;
+            }
+        }
+    }
 }

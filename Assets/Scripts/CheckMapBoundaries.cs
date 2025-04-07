@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Device;
 
 public class CheckMapBoundaries : MonoBehaviour
 {
     private CapsuleCollider2D capsuleCollider2D; //for colliding with walls
     private BoxCollider2D boxXollider; //for the taking damage
-    public float radiusOfRayCast;
-    public LayerMask playerLayer;
-    public LayerMask obsticleLayer;
+    public float rayDistance;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask obsticleLayer;
+    [SerializeField] private float padding = 150.0f;
 
     private void Awake()
     {
@@ -20,58 +22,74 @@ public class CheckMapBoundaries : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(RaycastingWall());
+        //StartCoroutine(RaycastingWall());
     }
 
-    private IEnumerator RaycastingWall()
+    private void Update()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(0.5f);
-
-        while(true)
-        {
-            yield return waitTime;
-            StopPlayerMovingThroughWalls();
-        }
+        ClampPositionToScreenBounds();
     }
 
-    private bool CheckIfThePlayerHittedWall()
+    //private IEnumerator RaycastingWall()
+    //{
+    //    WaitForSeconds waitTime = new WaitForSeconds(0.5f);
+
+    //    while(true)
+    //    {
+    //        yield return waitTime;
+    //        StopPlayerMovingThroughWalls();
+    //    }
+    //}
+
+    //private bool CheckIfThePlayerHittedWall()
+    //{
+    //    Vector2 position = transform.position;
+
+    //    RaycastHit2D hitLeft = Physics2D.Raycast(position, Vector2.left, rayDistance, obsticleLayer);
+    //    RaycastHit2D hitRight = Physics2D.Raycast(position, Vector2.right, rayDistance, obsticleLayer);
+    //    if (hitLeft.collider != null)
+    //    {
+    //        return true;
+    //    }
+    //    else if (hitRight.collider != null)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    //private void StopPlayerMovingThroughWalls()
+    //{
+    //    if(CheckIfThePlayerHittedWall())
+    //    {
+    //        capsuleCollider2D.enabled = true;
+    //        boxXollider.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        boxXollider.enabled = true;
+    //    }
+    //}
+
+    private void ClampPositionToScreenBounds()
     {
-        Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radiusOfRayCast, playerLayer);
-        
-        if(rangeCheck.Length > 0)
-        {
-            Transform target = rangeCheck[0].transform;
+        float screenLeft = Camera.main.ScreenToWorldPoint(Vector3.zero).x + padding; //bottom left corner
 
-            Vector2 directionToWall = (target.position - transform.position).normalized;
+        Vector3 bottonRightCorner = new Vector3(UnityEngine.Screen.width, 0, 0);
 
-            float distanceToWall = Vector2.Distance(transform.position, target.position);
+        float screenRight = Camera.main.ScreenToWorldPoint(bottonRightCorner).x - padding;
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToWall, distanceToWall, obsticleLayer);
-            
-            if (hit.collider != null)
-            {
-                return true;
-            }
-        }
-        return false;
+        float currentX = transform.position.x;
+
+        float clampedX = Mathf.Clamp(currentX, screenLeft, screenRight);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+
     }
 
-    private void StopPlayerMovingThroughWalls()
-    {
-        if(CheckIfThePlayerHittedWall())
-        {
-            capsuleCollider2D.enabled = true;
-            boxXollider.enabled = false;
-        }
-        else
-        {
-            boxXollider.enabled = true;
-        }
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radiusOfRayCast);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, rayDistance);
+    //}
 }

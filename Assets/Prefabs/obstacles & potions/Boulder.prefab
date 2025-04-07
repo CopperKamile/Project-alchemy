@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3647123452796303189}
   - component: {fileID: 733864982049911921}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: motion blur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 419906802756981498}
   - component: {fileID: -2799121205830346985}
   - component: {fileID: -6924542702422827202}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boulder
   m_TagString: Boulder
   m_Icon: {fileID: 0}
