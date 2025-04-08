@@ -24,17 +24,13 @@ public class MoveObject: MonoBehaviour
     void Update()
     {
         trolly.isTrollyMoving = true;
-        //if(trolly.isTrollyMoving == true)
-        //{
-        //    MoveObjects();
-        //}
 
         MoveObjects();
     }
 
     private void MoveObjects()
     {
-        transform.position = Vector2.MoveTowards(transform.position, screenEnd.transform.position, speed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, screenEnd.transform.position, speed * Time.deltaTime);
        
         //Debug.Log("Inside in each potion prefab Start position: " + transform.position);
         //Debug.Log("Inside in each potion prefab End position: " + screenEnd.transform.position);

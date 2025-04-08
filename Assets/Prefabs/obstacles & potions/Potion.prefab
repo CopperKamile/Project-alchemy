@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 5178474912113294587}
   - component: {fileID: 4899712716728336787}
   - component: {fileID: 2621663978482567724}
+  - component: {fileID: -3672624886215434071}
   - component: {fileID: 8398940730400227239}
   - component: {fileID: -6849852241048436826}
   m_Layer: 9
@@ -127,7 +128,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1629508339
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.08833629, g: 0.58811957, b: 1, a: 1}
@@ -176,6 +177,22 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-3672624886215434071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3418317185396118350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679811c6bed2f6a4a8c21b5fd20fe10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  speed: 0
+  rigidBody: {fileID: -6849852241048436826}
+  screenEndYPosition: -10
 --- !u!114 &8398940730400227239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +224,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

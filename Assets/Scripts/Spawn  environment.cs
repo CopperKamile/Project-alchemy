@@ -46,7 +46,7 @@ public class SpawningEnvironment : MonoBehaviour
             GameObject prefabToSpawn = objectToSpawnPrefab[randomPrefabIndex];
 
             prefabToSpawn = Instantiate(prefabToSpawn, spawnPoints[randomSpawnSpot].transform.position, Quaternion.identity);
-           
+            prefabToSpawn.GetComponent<Rigidbody2D>().linearVelocityY = TrollyController.instance.trollySpeed;
             TotalCountOfSpawnedObjects++;
         }
     }

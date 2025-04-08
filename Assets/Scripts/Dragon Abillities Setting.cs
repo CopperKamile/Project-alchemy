@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,13 +35,13 @@ public class DragonAbillitiesSetting : MonoBehaviour
         {
             dragonFire.SetActive(true);
             MovementSpeedIncreased();
-            ApplySpeedToObstacles();
+            //ApplySpeedToObstacles();
         }
         else if (dragonBreathInput.WasReleasedThisFrame())
         {
             dragonFire.SetActive(false);
             MovementSpeedDecreased();
-            DeapplySpeedToObstacles();
+            //DeapplySpeedToObstacles();
         }
         else if (JumpInput.WasPressedThisFrame())
         {
@@ -63,16 +62,19 @@ public class DragonAbillitiesSetting : MonoBehaviour
     private void MovementSpeedIncreased()
     {
        // Debug.Log("Speed without boost: " + currentSpeed);
-        currentSpeed *= speedBoost;
-      
+        //currentSpeed *= speedBoost;
+        TrollyController.instance.trollySpeed *= speedBoost;
+
         //Debug.Log("Speed with boost: " + currentSpeed);
     }
 
     private void MovementSpeedDecreased()
     {
-       // Debug.Log("Speed without boost: " + currentSpeed);
-        currentSpeed = trolly.trollySpeed;
-       
+        // Debug.Log("Speed without boost: " + currentSpeed);
+        //currentSpeed = trolly.trollySpeed;
+        TrollyController.instance.trollySpeed /= speedBoost;
+
+
         //Debug.Log("Speed with boost: " + currentSpeed);
     }
 

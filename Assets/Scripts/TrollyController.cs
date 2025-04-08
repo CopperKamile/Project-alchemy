@@ -16,11 +16,23 @@ public class TrollyController : MonoBehaviour
 
     private Vector2 trollyMovement;
 
+    public static TrollyController instance; //singleton
+
     public float trollySpeed; //connect to dragon abillities setting script
+
 
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnEnable()
@@ -46,9 +58,10 @@ public class TrollyController : MonoBehaviour
 
         inputAxis.y = 0; //disable y axis (W and S buttons)
 
-        trollyMovement = inputAxis * trollySpeed;
-
-        trollyRigidBody.AddForce(trollyMovement);
+        trollyMovement = Vector2.Lerp(trollyMovement, inputAxis * trollySpeed, Time.deltaTime * 15f); //smooth movement
+        //trollyMovement = inputAxis * trollySpeed;
+        //trollyRigidBody.AddForce(trollyMovement);
+        trollyRigidBody.linearVelocity = trollyMovement;
 
         isTrollyMoving = true;
     }
