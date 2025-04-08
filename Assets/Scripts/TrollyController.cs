@@ -59,8 +59,6 @@ public class TrollyController : MonoBehaviour
         inputAxis.y = 0; //disable y axis (W and S buttons)
 
         trollyMovement = Vector2.Lerp(trollyMovement, inputAxis * trollySpeed, Time.deltaTime * 15f); //smooth movement
-        //trollyMovement = inputAxis * trollySpeed;
-        //trollyRigidBody.AddForce(trollyMovement);
         trollyRigidBody.linearVelocity = trollyMovement;
 
         isTrollyMoving = true;

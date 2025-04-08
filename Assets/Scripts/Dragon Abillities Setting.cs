@@ -29,19 +29,16 @@ public class DragonAbillitiesSetting : MonoBehaviour
 
     private void Update()
     { 
-
         //Later use states (enums or switch)
         if (dragonBreathInput.WasPressedThisFrame())
         {
             dragonFire.SetActive(true);
             MovementSpeedIncreased();
-            //ApplySpeedToObstacles();
         }
         else if (dragonBreathInput.WasReleasedThisFrame())
         {
             dragonFire.SetActive(false);
             MovementSpeedDecreased();
-            //DeapplySpeedToObstacles();
         }
         else if (JumpInput.WasPressedThisFrame())
         {
@@ -57,45 +54,15 @@ public class DragonAbillitiesSetting : MonoBehaviour
         }
     }
 
-
-
     private void MovementSpeedIncreased()
     {
-       // Debug.Log("Speed without boost: " + currentSpeed);
-        //currentSpeed *= speedBoost;
         TrollyController.instance.trollySpeed *= speedBoost;
-
-        //Debug.Log("Speed with boost: " + currentSpeed);
     }
 
     private void MovementSpeedDecreased()
     {
-        // Debug.Log("Speed without boost: " + currentSpeed);
-        //currentSpeed = trolly.trollySpeed;
         TrollyController.instance.trollySpeed /= speedBoost;
-
-
-        //Debug.Log("Speed with boost: " + currentSpeed);
     }
-
-    private void ApplySpeedToObstacles()
-    {
-        movingObjects.currentGravity *= speedBoost;
-
-        movingObjects.nextSpawnTime /= speedBoost;
-        movingObjects.minTimeDelay /= speedBoost;
-        movingObjects.maxTimeDelay /= speedBoost;
-    }
-
-    private void DeapplySpeedToObstacles()
-    {
-        movingObjects.currentGravity /= speedBoost;
-
-        movingObjects.nextSpawnTime *= speedBoost;
-        movingObjects.minTimeDelay *= speedBoost;
-        movingObjects.maxTimeDelay *= speedBoost;
-    }
-
 
     private void JumpOver() //jump over boulders and potions
     {
