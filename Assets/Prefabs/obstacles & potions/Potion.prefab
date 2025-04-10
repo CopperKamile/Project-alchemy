@@ -61,7 +61,6 @@ GameObject:
   - component: {fileID: 4899712716728336787}
   - component: {fileID: 2621663978482567724}
   - component: {fileID: -3672624886215434071}
-  - component: {fileID: 8398940730400227239}
   - component: {fileID: -6849852241048436826}
   m_Layer: 9
   m_Name: Potion
@@ -190,25 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 0
+  speed: 2
   rigidBody: {fileID: -6849852241048436826}
   screenEndYPosition: -10
---- !u!114 &8398940730400227239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3418317185396118350}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9eabbc2753895b4e8cc77c550a89e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trolly: {fileID: 3599022975883195925, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
-  screenEnd: {fileID: 8831889035615665244, guid: d4052337e64f1cc45be1180d3fbfd54c, type: 3}
-  lifeSpan: 0
-  speed: 0
 --- !u!50 &-6849852241048436826
 Rigidbody2D:
   serializedVersion: 5

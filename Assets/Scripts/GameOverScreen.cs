@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Diedscreen : MonoBehaviour
+public class GameOverScreen : MonoBehaviour
 {
     public TrollyController trolly;
-    public GameObject diedScreen;
+    public GameObject gameOverScreenObj;
     public SpawningEnvironment spawner;
     public PathMovementScript[] pathMovement;
     void Start()
     {
-        diedScreen.SetActive(false);
+        gameOverScreenObj.SetActive(false);
     }
 
     
@@ -16,15 +16,13 @@ public class Diedscreen : MonoBehaviour
     {
         if(trolly.currentHealth <= 0)
         {
-            disablePathMovement();
-            SetScreenActive();
-            spawner.enabled = false;
+            ActivateGameOverScreen();
         }
     }
 
     private void SetScreenActive()
     {
-        diedScreen.SetActive(true);
+        gameOverScreenObj.SetActive(true);
     }
 
 
@@ -34,5 +32,13 @@ public class Diedscreen : MonoBehaviour
         {
             path.enabled = false;
         }
+    }
+
+
+    public void ActivateGameOverScreen()
+    {
+        disablePathMovement();
+        SetScreenActive();
+        spawner.enabled = false;
     }
 }

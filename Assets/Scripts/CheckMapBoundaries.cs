@@ -11,14 +11,14 @@ public class CheckMapBoundaries : MonoBehaviour
     public float rayDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask obsticleLayer;
-    [SerializeField] private float padding = 150.0f;
+    [SerializeField] private float padding;
 
     private void Awake()
     {
         boxXollider = GetComponent<BoxCollider2D>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        capsuleCollider2D.enabled = false;
-        boxXollider.enabled = true;
+        //capsuleCollider2D.enabled = false;
+        //boxXollider.enabled = true;
     }
     private void Start()
     {
@@ -30,46 +30,46 @@ public class CheckMapBoundaries : MonoBehaviour
         ClampPositionToScreenBounds();
     }
 
-    //private IEnumerator RaycastingWall()
-    //{
-    //    WaitForSeconds waitTime = new WaitForSeconds(0.5f);
+    private IEnumerator RaycastingWall()
+    {
+        WaitForSeconds waitTime = new WaitForSeconds(0.5f);
 
-    //    while(true)
-    //    {
-    //        yield return waitTime;
-    //        StopPlayerMovingThroughWalls();
-    //    }
-    //}
+        while (true)
+        {
+            yield return waitTime;
+            StopPlayerMovingThroughWalls();
+        }
+    }
 
-    //private bool CheckIfThePlayerHittedWall()
-    //{
-    //    Vector2 position = transform.position;
+    private bool CheckIfThePlayerHittedWall()
+    {
+        Vector2 position = transform.position;
 
-    //    RaycastHit2D hitLeft = Physics2D.Raycast(position, Vector2.left, rayDistance, obsticleLayer);
-    //    RaycastHit2D hitRight = Physics2D.Raycast(position, Vector2.right, rayDistance, obsticleLayer);
-    //    if (hitLeft.collider != null)
-    //    {
-    //        return true;
-    //    }
-    //    else if (hitRight.collider != null)
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
+        RaycastHit2D hitLeft = Physics2D.Raycast(position, Vector2.left, rayDistance, obsticleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(position, Vector2.right, rayDistance, obsticleLayer);
+        if (hitLeft.collider != null)
+        {
+            return true;
+        }
+        else if (hitRight.collider != null)
+        {
+            return true;
+        }
+        return false;
+    }
 
-    //private void StopPlayerMovingThroughWalls()
-    //{
-    //    if(CheckIfThePlayerHittedWall())
-    //    {
-    //        capsuleCollider2D.enabled = true;
-    //        boxXollider.enabled = false;
-    //    }
-    //    else
-    //    {
-    //        boxXollider.enabled = true;
-    //    }
-    //}
+    private void StopPlayerMovingThroughWalls()
+    {
+        if (CheckIfThePlayerHittedWall())
+        {
+            capsuleCollider2D.enabled = true;
+            boxXollider.enabled = false;
+        }
+        else
+        {
+            boxXollider.enabled = true;
+        }
+    }
 
     private void ClampPositionToScreenBounds()
     {
