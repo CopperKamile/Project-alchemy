@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Potion
   - Boulder
+  - Risk zone
   layers:
   - Default
   - TransparentFX

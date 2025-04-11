@@ -6,6 +6,7 @@ using UnityEngine.Device;
 
 public class CheckMapBoundaries : MonoBehaviour
 {
+    //LATER TO DELETE THIS SCRIPT< BECAUSE MAP BOUNDARIES ARE CHECKED BY BOUNDARIES GAME OBJECT 
     private CapsuleCollider2D capsuleCollider2D; //for colliding with walls
     private BoxCollider2D boxXollider; //for the taking damage
     public float rayDistance;
@@ -17,8 +18,6 @@ public class CheckMapBoundaries : MonoBehaviour
     {
         boxXollider = GetComponent<BoxCollider2D>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        //capsuleCollider2D.enabled = false;
-        //boxXollider.enabled = true;
     }
     private void Start()
     {
@@ -27,7 +26,7 @@ public class CheckMapBoundaries : MonoBehaviour
 
     private void Update()
     {
-        ClampPositionToScreenBounds();
+        //ClampPositionToScreenBounds();
     }
 
     private IEnumerator RaycastingWall()
@@ -85,11 +84,4 @@ public class CheckMapBoundaries : MonoBehaviour
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
 
     }
-
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, rayDistance);
-    //}
 }

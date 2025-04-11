@@ -15,6 +15,7 @@ public class TrollyController : MonoBehaviour
     Rigidbody2D trollyRigidBody;
 
     private Vector2 trollyMovement;
+    [HideInInspector] public Vector2 inputAxis;
 
     public static TrollyController instance; //singleton
 
@@ -54,7 +55,8 @@ public class TrollyController : MonoBehaviour
 
     private void MoveTrolly()
     {
-        Vector2 inputAxis = moveAction.ReadValue<Vector2>();
+        inputAxis = moveAction.ReadValue<Vector2>();
+        //Debug.Log("Input axis: " + inputAxis);
 
         inputAxis.y = 0; //disable y axis (W and S buttons)
 

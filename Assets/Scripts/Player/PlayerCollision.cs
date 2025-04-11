@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerCollisiosn : MonoBehaviour
 {
-    private TrollyController trolly;
     [SerializeField] private int potionsCount = 0;
     public TextMeshProUGUI countText;
 
-    public BoulderSettings boulder;
+    public MovingObjectSettings boulder;
 
     private void Start()
     {
+        //Debug.Log("Current health: " + TrollyController.instance.currentHealth);
         UpdateText();
-        trolly = GetComponent<TrollyController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,11 +54,11 @@ public class PlayerCollisiosn : MonoBehaviour
 
     private void TakeDamage()
     {
-        Debug.Log("Current health: " + trolly.currentHealth);
-        trolly.currentHealth -= boulder.damage;
-        Debug.Log("Current health: " + trolly.currentHealth);
+        //Debug.Log("Current health: " + TrollyController.instance.currentHealth);
+        TrollyController.instance.currentHealth -= boulder.damage;
+        //Debug.Log("Current health: " + TrollyController.instance.currentHealth);
 
-        if(trolly.currentHealth <= 0)
+        if(TrollyController.instance.currentHealth <= 0)
         {
             Destroy(gameObject);
             Debug.Log("YOU DIED");

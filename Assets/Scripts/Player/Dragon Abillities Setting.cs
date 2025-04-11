@@ -6,11 +6,12 @@ public class DragonAbillitiesSetting : MonoBehaviour
     public GameObject dragonFire;
     public GameObject trollyShadow;
     public GameObject dragonWings;
+    public bool isSpeedBoostApplied = false;
+    public bool isDragonBreathInputPressed;
 
     private InputAction dragonBreathInput;
     private InputAction JumpInput;
-    public TrollyController trolly;
-    public PlayerCollisiosn collisionWithObjects;
+    private PlayerCollisiosn collisionWithObjects;
 
     [SerializeField] private float currentSpeed;
     public float speedBoost;
@@ -19,10 +20,17 @@ public class DragonAbillitiesSetting : MonoBehaviour
 
     private void Start()
     {
+        collisionWithObjects = GetComponentInParent<PlayerCollisiosn>();
+
+        isSpeedBoostApplied = false;
+        isDragonBreathInputPressed = false;
+
         dragonWings.SetActive(false);
         dragonFire.SetActive(false);
         trollyShadow.SetActive(false);
-        currentSpeed = trolly.trollySpeed;
+
+        currentSpeed = TrollyController.instance.trollySpeed;
+
         dragonBreathInput = InputSystem.actions.FindAction("DragonBreath"); //press E
         JumpInput = InputSystem.actions.FindAction("Jump");
     }
@@ -32,11 +40,15 @@ public class DragonAbillitiesSetting : MonoBehaviour
         //Later use states (enums or switch)
         if (dragonBreathInput.WasPressedThisFrame())
         {
+            isDragonBreathInputPressed = true;
+            isSpeedBoostApplied = true;
             dragonFire.SetActive(true);
             MovementSpeedIncreased();
         }
         else if (dragonBreathInput.WasReleasedThisFrame())
         {
+            isDragonBreathInputPressed = false;
+            isSpeedBoostApplied = false;
             dragonFire.SetActive(false);
             MovementSpeedDecreased();
         }
@@ -67,13 +79,13 @@ public class DragonAbillitiesSetting : MonoBehaviour
     private void JumpOver() //jump over boulders and potions
     {
         collisionWithObjects.enabled = false;
-        SetLayerMask(trolly.gameObject, LayerMask.NameToLayer("JumpingTrolly"));
+        SetLayerMask(TrollyController.instance.gameObject, LayerMask.NameToLayer("JumpingTrolly"));
     }
 
     private void LandOnGround()
     {
         collisionWithObjects.enabled = true;
-        SetLayerMask(trolly.gameObject, LayerMask.NameToLayer("Player"));
+        SetLayerMask(TrollyController.instance.gameObject, LayerMask.NameToLayer("Player"));
     }
 
     private void SetLayerMask(GameObject gameObjectParent, int newLayer)
