@@ -7,7 +7,7 @@ public class DragonAbillitiesSetting : MonoBehaviour
     public GameObject trollyShadow;
     public GameObject dragonWings;
     public bool isSpeedBoostApplied = false;
-    public bool isDragonBreathInputPressed;
+    public bool isDragonBreathInputPressed = false;
 
     private InputAction dragonBreathInput;
     private InputAction JumpInput;
