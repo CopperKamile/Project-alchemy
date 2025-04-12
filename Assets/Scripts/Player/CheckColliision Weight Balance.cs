@@ -1,29 +1,35 @@
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class CheckColliisionWeightBalance : MonoBehaviour
 {
-    private WeightBalance balanceScript;
-
-    private void Start()
+    public bool IsRectTransformOverlaping(RectTransform a, RectTransform b)
     {
-        balanceScript = GetComponent<WeightBalance>();
+        Rect rectA = GetWorldRect(a);
+        Rect rectB = GetWorldRect(b);
+        return rectA.Overlaps(rectB);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private Rect GetWorldRect(RectTransform rt)
     {
-        if (collision.gameObject.CompareTag("Risk zone"))
-        {
-            Debug.Log("Ball entered risk zone");
-            balanceScript.isBalanceOff = true;
-        }
-    }
+        Vector3[] corner = new Vector3[4];
+        rt.GetWorldCorners(corner);
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Risk zone"))
-        {
-            Debug.Log("Ball exits risk zone");
-            balanceScript.isBalanceOff = false;
-        }
+        //Debug.Log("World Corners");
+        //for (var i = 0; i < 4; i++)
+        //{
+        //    Debug.Log("World Corner " + i + " : " + v[i]);
+        //}
+
+        //corners 
+        // [1] --------- [2]
+        //  |             |
+        // [0] --------- [3]
+
+        float width = Vector3.Distance(corner[0], corner[3]);
+        float height = Vector3.Distance(corner[0], corner[1]);
+
+        return new Rect(corner[0], new Vector2(width, height));
+
     }
 }

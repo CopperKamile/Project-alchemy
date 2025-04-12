@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1629508339
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.027862206, g: 0.11438396, b: 0.2612921, a: 0.84313726}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311510695
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.7552887, g: 0.066719405, b: 0.066719405, a: 1}
@@ -250,7 +250,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311510695
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0.060892045, b: 0.060892045, a: 1}
@@ -278,8 +278,8 @@ MonoBehaviour:
   dragonFire: {fileID: 4996590284096073475}
   trollyShadow: {fileID: 240013012168559008}
   dragonWings: {fileID: 0}
-  trolly: {fileID: 781504077299803315}
-  collisionWithObjects: {fileID: 0}
+  isSpeedBoostApplied: 0
+  isDragonBreathInputPressed: 0
   currentSpeed: 0
   speedBoost: 2
   movingObjects: {fileID: 0}
@@ -357,7 +357,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1629508339
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.02745098, g: 0.11372549, b: 0.2627451, a: 0.84313726}
@@ -444,7 +444,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311510695
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.5540308, g: 0, b: 0, a: 1}
@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 502274660301965769}
   - component: {fileID: 6172848091876433197}
   - component: {fileID: 781504077299803315}
+  - component: {fileID: 6718993986231403427}
   m_Layer: 6
   m_Name: trolly
   m_TagString: Untagged
@@ -575,7 +576,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1629508339
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8660108, g: 0.90165806, b: 0.5003197, a: 1}
@@ -710,8 +711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384add6b6cba6734cac58e359e9a6d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionsCount: 0
-  countText: {fileID: 0}
   boulder: {fileID: 0}
 --- !u!114 &781504077299803315
 MonoBehaviour:
@@ -728,7 +727,22 @@ MonoBehaviour:
   health: 0
   currentHealth: 0
   isTrollyMoving: 0
+  inputAxis: {x: 0, y: 0}
   trollySpeed: 1
+--- !u!114 &6718993986231403427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366313202170405315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c24aa14b74d9c0439eff4c6642ce122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionsCount: 0
+  countText: {fileID: 0}
 --- !u!1 &7453665415042749977
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +866,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -294066317
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.9108061, g: 0.5993494, b: 0.2720962, a: 1}
@@ -939,7 +953,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311510695
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.7552887, g: 0.066719405, b: 0.066719405, a: 1}

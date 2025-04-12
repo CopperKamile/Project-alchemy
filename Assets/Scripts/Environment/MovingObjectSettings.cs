@@ -3,7 +3,7 @@ using UnityEngine;
 public class MovingObjectSettings : MonoBehaviour
 {
     public float damage;
-    private float speed;
+    public float speed;
     public Rigidbody2D rigidBody;
     public float screenEndYPosition;
 
