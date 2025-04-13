@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -19,7 +20,8 @@ public class TrollyController : MonoBehaviour
 
     public static TrollyController instance; //singleton
 
-    public float trollySpeed; //connect to dragon abillities setting script
+    [HideInInspector] public float trollySpeed; //connect to dragon abillities setting script
+    public float originalTrollySpeed;
 
 
     private void Awake()
@@ -43,6 +45,7 @@ public class TrollyController : MonoBehaviour
 
     void Start()
     {
+        trollySpeed = originalTrollySpeed;
         currentHealth = health;
         isTrollyMoving = false;
         trollyRigidBody = GetComponent<Rigidbody2D>();

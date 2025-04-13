@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 6172848091876433197}
   - component: {fileID: 781504077299803315}
   - component: {fileID: 6718993986231403427}
+  - component: {fileID: -7071727651462724395}
   m_Layer: 6
   m_Name: trolly
   m_TagString: Untagged
@@ -729,6 +730,7 @@ MonoBehaviour:
   isTrollyMoving: 0
   inputAxis: {x: 0, y: 0}
   trollySpeed: 1
+  originalTrollySpeed: 0
 --- !u!114 &6718993986231403427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +745,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionsCount: 0
   countText: {fileID: 0}
+--- !u!114 &-7071727651462724395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366313202170405315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050d179579ee5854488c94a3ce2e1455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trolleyBrokenBalanceColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7453665415042749977
 GameObject:
   m_ObjectHideFlags: 0

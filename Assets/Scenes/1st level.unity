@@ -740,6 +740,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904cc6a7b17725945937b6dafc5b3429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &763370619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7071727651462724395, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+  m_PrefabInstance: {fileID: 6336346920759843301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050d179579ee5854488c94a3ce2e1455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796280985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,8 +1363,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350.23, y: 0}
-  m_SizeDelta: {x: 206.54, y: 100}
+  m_AnchoredPosition: {x: 382, y: 0}
+  m_SizeDelta: {x: 140, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348841797
 MonoBehaviour:
@@ -1619,6 +1630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragonAbillities: {fileID: 1241461148}
+  brokenAnimation: {fileID: 763370619}
   isInRiskZone: 0
   movingObjectSettingsList:
   - {fileID: 419906802756981498, guid: 08ba5fb64502a7f4cbe5d2d348dfd6df, type: 3}
@@ -1626,14 +1638,16 @@ MonoBehaviour:
   pathMovementScriptList:
   - {fileID: 2075524267}
   - {fileID: 1253834566}
+  Spawner: {fileID: 1301479576}
   riskZoneLeft: {fileID: 1719576814}
   riskZoneRight: {fileID: 1348841796}
   balanceBar: {fileID: 243645127}
-  saveTrolleyTimePenalty: 0.2
-  moveDistanceIncrament: 500
-  slowDownInRiskZone: 20
+  saveTrolleyTimePenalty: 0.7
+  moveDistanceIncrament: 600
+  slowDownInRiskZone: 600
   speedBeforeSpeedBoost: 1
-  ReturningSpeedBeforeBoost: 10
+  ReturningSpeedBeforeBoost: 2
+  AmountToSlowDownObjectsSpeed: 1.5
 --- !u!114 &1363963425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2441,8 +2455,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -328.78, y: 0}
-  m_SizeDelta: {x: 240.74, y: 100}
+  m_AnchoredPosition: {x: -380, y: 0}
+  m_SizeDelta: {x: 140, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1719576815
 MonoBehaviour:
@@ -2806,6 +2820,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7071727651462724395, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: trolleyBrokenBalanceColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7071727651462724395, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: trolleyBrokenBalanceColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7071727651462724395, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: trolleyBrokenBalanceColor.g
+      value: 0.062745094
+      objectReference: {fileID: 0}
+    - target: {fileID: -7071727651462724395, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: trolleyBrokenBalanceColor.r
+      value: 0.7097013
+      objectReference: {fileID: 0}
     - target: {fileID: 502274660301965769, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2816,6 +2846,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 781504077299803315, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
       propertyPath: trollySpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 781504077299803315, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}
+      propertyPath: originalTrollySpeed
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1850317978367827012, guid: 8784338b34a09cd4a83b9bf766f0573a, type: 3}

@@ -8,12 +8,14 @@ using System.Collections;
 public class WeightBalance : MonoBehaviour
 {
     [SerializeField] private DragonAbillitiesSetting dragonAbillities;
+    [SerializeField] private TrolleyBalanceBrokenAnimation brokenAnimation;
     private CheckColliisionWeightBalance collisionScript;
 
-    public bool isInRiskZone = false;
+    [HideInInspector] public bool isInRiskZone = false;
 
     public List<MovingObjectSettings> movingObjectSettingsList;
     public List<PathMovementScript> pathMovementScriptList;
+    public SpawningEnvironment Spawner;
 
     private RectTransform ballRectTransform;
     public RectTransform riskZoneLeft;
@@ -28,6 +30,7 @@ public class WeightBalance : MonoBehaviour
 
     [Header("How fast balance ball should move")]
     //[SerializeField] private float timePenalty;
+    private bool hasSlowDown;
     [SerializeField] private float saveTrolleyTimePenalty;
     private float lockedPosition;
     [SerializeField] private float moveDistanceIncrament;
@@ -35,6 +38,7 @@ public class WeightBalance : MonoBehaviour
 
     [SerializeField] private float speedBeforeSpeedBoost;
     [SerializeField] private float ReturningSpeedBeforeBoost;
+    [SerializeField] private float AmountToSlowDownObjectsSpeed;
 
     //[SerializeField] private float speedAfterSpeedBoost;
     //[SerializeField] private float ReturningSpeedAfterBoost;
@@ -148,29 +152,31 @@ public class WeightBalance : MonoBehaviour
         isInRiskZone = true;
 
         float timePassed = 0.0f;
+        hasSlowDown = false;
 
         while(timePassed < saveTrolleyTimePenalty)
         {
-            if (PlayerDidSaveBalance()) //moving left when ball is on the right
+            if (PlayerDidSaveBalance() && TrollyController.instance.gameObject != null) 
             {
                 isInRiskZone = false;
-             
+                ResetSpeed();
+                brokenAnimation.FixedTrolleyBalanceIndications();
                 yield break;
             }
 
-            //slow down the time, so the players have time to 'escape danger zone'
-            //<- slow down the movement of objects
-            //player needs to hold really long to move ball to opposite direction
-            SlowDownBalanceBall(slowDownInRiskZone);
+            if(!hasSlowDown && TrollyController.instance.gameObject != null)
+            {
+                SlowDownBalanceBall(slowDownInRiskZone);
+                hasSlowDown = true;
+            }
 
+            MoveBalanceBall(slowDownInRiskZone);
 
             timePassed += Time.deltaTime;
             yield return null;
         }
 
         ShowFullBalanceFail();
-
-        //ResetSpeed();
     }
 
 
@@ -182,25 +188,22 @@ public class WeightBalance : MonoBehaviour
 
     private void SlowDownBalanceBall(float slowDownTime)
     {
-        //slow down the evrything
         Debug.Log(" BALANCE BALL IS SLOWED DOWN");
+        if (hasSlowDown) return;
 
-
-        MoveBalanceBall(slowDownTime);
-
-        //FIX IT: somehow the speed of trolley becomes zero (is reduced to zero, like it is divided constantly like in update)
-        //foreach(var movingObj in movingObjectSettingsList)
-        //{
-        //    movingObj.speed = TrollyController.instance.trollySpeed / 2;
-        //}
-
-        //foreach (var pathObj in pathMovementScriptList)
-        //{
-        //    pathObj.speed = TrollyController.instance.trollySpeed / 2;
-        //}
-
-        //TrollyController.instance.trollySpeed /= 2;
+        TrollyController.instance.trollySpeed /= AmountToSlowDownObjectsSpeed;
         
+        foreach (var movingObj in movingObjectSettingsList)
+        {
+            movingObj.speed = TrollyController.instance.trollySpeed;
+        }
+
+        foreach (var pathObj in pathMovementScriptList)
+        {
+            pathObj.speed = TrollyController.instance.trollySpeed;
+        }
+
+        hasSlowDown = true;
     }
 
 
@@ -212,7 +215,10 @@ public class WeightBalance : MonoBehaviour
         //after some time, show animation that wagon is fixed, allow the movement and spawning
         Debug.Log(" TROLLEY COMPLETLY LOST ITS BALANCE");
 
+        brokenAnimation.FullyBrokenBalanceIndications();
         TrollyController.instance.trollySpeed = 0.0f;
+        TrollyController.instance.isTrollyMoving = false;
+
         foreach (var movingObj in movingObjectSettingsList)
         {
             movingObj.speed = 0.0f;
@@ -222,19 +228,38 @@ public class WeightBalance : MonoBehaviour
         {
             pathObj.speed = 0.0f;
         }
-        //DISABLE SPAWNER
 
-        //FIX IT:
-        //if(dragonAbillities.isDragonBreathInputPressed)
-        //{
-        //    ResetSpeed();
-        //}
+        ballPosition = ballRectTransform.anchoredPosition.x;
+
+        Spawner.enabled = false;
+
+        StartCoroutine(WaitForPlayerRecovery());
 
     }
 
+    private IEnumerator WaitForPlayerRecovery()
+    {
+        while(true)
+        {
+            if (PlayerDidSaveBalance() && TrollyController.instance.gameObject != null)
+            {
+                isInRiskZone = false;
+                ResetSpeed();
+                brokenAnimation.FixedTrolleyBalanceIndications();
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+
+
     private void ResetSpeed()
     {
-        TrollyController.instance.trollySpeed = 15f;
+        TrollyController.instance.trollySpeed = TrollyController.instance.originalTrollySpeed;
+        TrollyController.instance.isTrollyMoving = true;
+
         foreach (var movingObj in movingObjectSettingsList)
         {
             movingObj.speed = TrollyController.instance.trollySpeed;
@@ -244,5 +269,8 @@ public class WeightBalance : MonoBehaviour
         {
             pathObj.speed = TrollyController.instance.trollySpeed;
         }
+
+        Spawner.enabled = true;
+        hasSlowDown = false;
     }
 }
